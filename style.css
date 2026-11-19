@@ -1,0 +1,234 @@
+/* ===== 色と寸法の定義 ===== */
+:root {
+  --color-bg: #f4f8fc;          /* ページ全体の背景（ごく淡いブルー） */
+  --color-surface: #ffffff;     /* カードの背景（白） */
+  --color-accent: #4a8fc7;      /* ボタンなどの強調色（落ち着いたブルー） */
+  --color-accent-dark: #3a76a8; /* ボタンにカーソルを載せたときの色 */
+  --color-accent-pale: #e3eff9; /* 表の見出しなどの淡いブルー */
+  --color-border: #c9dcec;      /* 枠線 */
+  --color-text: #2c3e50;        /* 本文の文字色 */
+  --color-text-sub: #5f7385;    /* 補助的な文字色 */
+  --radius: 8px;
+}
+
+/* ===== 全体 ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ===== ヘッダー ===== */
+header {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 20px 40px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* ===== レイアウト：左に入力欄、右に表示欄 ===== */
+main {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 32px;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+#entry-section {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+#summary-section,
+#list-section {
+  grid-column: 2;
+}
+
+/* ===== カード（各セクション共通） ===== */
+section {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 32px;
+}
+
+h2 {
+  margin: 0 0 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--color-accent-pale);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+/* ===== 入力フォーム ===== */
+#entry-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+#entry-form > div > label,
+legend {
+  display: block;
+  margin-bottom: 8px;
+  padding: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-sub);
+}
+
+input[type="date"],
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+input::placeholder {
+  color: #a3b4c4;
+}
+
+input:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--color-accent-pale);
+  outline-offset: 1px;
+  border-color: var(--color-accent);
+}
+
+/* 支出・収入の選択 */
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+fieldset label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 12px;
+  padding: 12px 20px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+fieldset label:has(input:checked) {
+  background-color: var(--color-accent-pale);
+  border-color: var(--color-accent);
+}
+
+input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--color-accent);
+}
+
+/* 追加ボタン */
+#add-button {
+  margin-top: 8px;
+  padding: 16px;
+  border: none;
+  border-radius: var(--radius);
+  background-color: var(--color-accent);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+
+#add-button:hover {
+  background-color: var(--color-accent-dark);
+}
+
+/* ===== 合計金額 ===== */
+#summary-section p {
+  margin: 0;
+  font-size: 1.125rem;
+  text-align: right;
+}
+
+#total {
+  margin: 0 4px;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-accent-dark);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===== 登録データ一覧 ===== */
+#entry-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#entry-table th,
+#entry-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+}
+
+#entry-table th {
+  background-color: var(--color-accent-pale);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-sub);
+}
+
+/* 金額の列（4列目）は右寄せ */
+#entry-table th:last-child,
+#entry-table td:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#entry-table tbody tr:hover {
+  background-color: var(--color-bg);
+}
+
+/* ===== 画面が狭いときは縦に並べる ===== */
+@media (max-width: 900px) {
+  main {
+    grid-template-columns: 1fr;
+    padding: 24px 16px;
+  }
+
+  #entry-section,
+  #summary-section,
+  #list-section {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  header {
+    padding: 16px;
+  }
+}
