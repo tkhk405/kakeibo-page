@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>家計簿アプリ</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="index.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>家計簿アプリ</h1>
+  </header>
+
+  <main>
+    <section id="entry-section">
+      <h2>データの登録</h2>
+      <form id="entry-form">
+        <div>
+          <label for="date">日付</label>
+          <input type="date" id="date" name="date" required>
+        </div>
+
+        <div>
+          <label for="item">品目</label>
+          <input type="text" id="item" name="item" placeholder="例：食費" required>
+        </div>
+
+        <fieldset>
+          <legend>種類</legend>
+          <label>
+            <input type="radio" name="type" value="expense" checked>
+            支出
+          </label>
+          <label>
+            <input type="radio" name="type" value="income">
+            収入
+          </label>
+        </fieldset>
+
+        <div>
+          <label for="amount">金額（円）</label>
+          <input type="number" id="amount" name="amount" min="0" step="1" placeholder="例：1000" required>
+        </div>
+
+        <button type="submit" id="add-button">追加</button>
+      </form>
+    </section>
+
+    <section id="summary-section">
+      <h2>合計金額</h2>
+      <p>合計：<output id="total">0</output> 円</p>
+    </section>
+
+    <section id="list-section">
+      <h2>登録データ一覧</h2>
+      <table id="entry-table">
+        <thead>
+          <tr>
+            <th scope="col">日付</th>
+            <th scope="col">品目</th>
+            <th scope="col">種類</th>
+            <th scope="col">金額（円）</th>
+          </tr>
+        </thead>
+        <tbody id="entry-list">
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>
